@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "Launch!"
+date:   2014-05-08 09:02:40
+categories: launch site 
+---
+
+For a while now I've bought this domain and thought that I should join the millions of people out there and write about stuff :-) 
+
+So this is it, my github page! I'll probably write something a bit more detailed about the architecture and the technologies I used. 
+
+I also plan to work a bit on the layout when I find some free time.
