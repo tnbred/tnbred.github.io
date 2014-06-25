@@ -40,9 +40,8 @@ Go to S3, create a new bucket using your domain's name ( in my case thomasbredil
 
 ![S3 static web hosting](/img/img3.png)
 
-Now that you've done that we'll create an html file called index.html with the following code :
-
-```<meta http-equiv="refresh" content="0; url=http://www.thomasbredillet.com/"> ```
+Now that you've done that we'll simply select Redirect all requests to another host name.
+www.thomasbredillet.com.
 
 Yep that's not that big, all it does is redirect to your domain with a www.
 
