@@ -1,0 +1,126 @@
+I"�<p>I’ve recently started using quite heavily Apache Spark and I wanted to write a few of my impressions.</p>
+
+<ul>
+  <li><a href="https://spark.apache.org/">Apache Spar</a></li>
+  <li><a href="http://spark.apache.org/docs/latest/programming-guide.html">Spark Documentation</a></li>
+  <li><a href="http://spark.apache.org/docs/latest/ec2-scripts.html">EC2 Script</a></li>
+  <li><a href="http://aws.amazon.com/cloudformation/">AWS Cloudformation</a></li>
+  <li><a href="http://akka.io/">Akka</a></li>
+</ul>
+
+<h3 id="whats-apache-spark-">What’s Apache Spark ?</h3>
+
+<p>Apache Spark is “a fast and general engine for large-scale data processing” basicaly this means that Spark helps you do computations on big data. You can use it by installing spark on a cluster of servers, or even locally, there are a tons of scripts to do that and most of them are provided by Spark themselves. Once you’ve got your cluster up and running you can simple run a Scala, Java or Python app that uses the Apache Spark library to run some specific operations that harnest the full power of your cluster.</p>
+
+<p>Example : 
+A simple way to count words in a bunch of files (in Scala)</p>
+
+<pre>
+  <code class="scala">
+    val files = spark.textFile("s3n://myawesomebucket/alotoftxtfiles/*.txt") 
+    val counts = files.flatMap(line =&gt; line.split(" "))
+                .map(word =&gt; (word, 1))
+                .reduceByKey(_ + _)
+    counts.saveAsTextFile("s3n://myawesomebucket/result")
+  </code>
+</pre>
+
+<p>If you want to understand how this codes work there’s nothing better than the spark documentation.</p>
+
+<h3 id="how-to-use-spark">How to use Spark.</h3>
+
+<p>First you’ll need to set up a brand new spark cluster ( again this can be done as a standalone locally if you want ).</p>
+
+<p>I like EC2 so I’m going to use the ec2-script, it words great.</p>
+
+<p>Once you have your cluster up and running, simply enough you’ll need to write a spark application. I personally use SBT. My project structure is as follows :</p>
+
+<pre>
+  <code class="shell">
+  	./build.sbt
+	./src/main/scala/WordCountExample.scala
+  	</code>
+  </pre>
+
+<p>With my WordCountExample.scala :</p>
+
+<pre>
+  <code class="scala">
+import org.apache.spark.SparkContext
+import org.apache.spark.SparkContext._
+import org.apache.spark.SparkConf
+import org.apache.spark.rdd.RDD
+import org.apache.spark.storage.StorageLevel
+
+object WordCountExample {
+  def main(args: Array[String]) {
+
+    val conf = new SparkConf().setAppName("Aggregator")
+    .set("spark.storage.memoryFraction", "0.2")
+    .set("spark.shuffle.memoryFraction", "0.5")
+    val sc = new SparkContext(conf)
+
+    val files = spark.textFile("s3n://myawesomebucket/alotoftxtfiles/*.txt") 
+    val counts = files.flatMap(line =&gt; line.split(" "))
+                .map(word =&gt; (word, 1))
+                .reduceByKey(_ + _)
+    counts.saveAsTextFile("s3n://myawesomebucket/result")
+    }
+  }
+
+  </code>
+</pre>
+
+<p>And my build.sbt :</p>
+
+<pre>
+  <code class="scala">
+name := "WordCountExample"
+
+version := "1.0"
+
+scalaVersion := "2.10.4"
+
+libraryDependencies += "org.apache.spark" %% "spark-core" % "1.0.1"
+
+resolvers += "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
+
+  </code>
+</pre>
+
+<p>You now have everything you need! Just run sbt compile and send the jar to your cluster.</p>
+
+<p>Once you’re done I use the following command to run the jar :</p>
+
+<pre>
+  <code class="shell">
+nohup ./bin/spark-submit --class "WordCountExample" &gt; /tmp/WordCount.log 2&gt;&amp;1 &amp;
+  </code>
+</pre>
+
+<p>And that’s it your application will be running you can follow it in the /tmp/WordCount.log file.</p>
+
+<p>You’ll see how it splits the calculations per number of files you have in your bucket, then for each file it will run the reduceByKey and aggregate it all back at the end.</p>
+
+<h3 id="what-ive-used-it-for-and-what-ive-learned">What I’ve Used it for and what I’ve learned</h3>
+
+<p>Now that the basic stuff is out of the way I can tell you a bit more about how I used it. Basically I ran two ‘benchmark’ jobs on spark. The first one is going through hundreds of millions of lines of text to match against a specific regex and counts the number of matches. The second one is training a neural network ( backpropagation ) by first generating a random training set and then benchmarking the NN performance over the whole data set. 
+In both case I ran this against the same cluster, 4 slaves and all machines were m3.2xlarge.
+Also for the NN I used an Akka application on my macbook with remote actors on my master than ran my jobs, overwhole that was very easy to setup.</p>
+
+<p>A few things I’ve learning :</p>
+
+<ul>
+  <li>There are multiple ways to do the same thing ( you can do the word count using a countByValue for example ) think carefuly about which function is going to distribute the job to the cluster and which function may create a bottleneck somewhere ( one machine used for a heavy aggregation for example ).</li>
+  <li>Spark is easier to use than Hadoop</li>
+  <li>Don’t use the ec2 script on production it’s better to create your own AMIs. Also the ec2 scripts security groups are very open so be mindful.</li>
+  <li>There are a LOT of built in functionalities already in Spark it’s basicaly limitless</li>
+  <li>Spark is super fast</li>
+  <li>Spark works very well as an Akka actor</li>
+</ul>
+
+<h3 id="parting-words">Parting words</h3>
+
+<p>Spark is awesome indeed, fantastic potential but there are still some things that bugs me. The ec2 script does its job well but it’s not at all flexible, you can start new machine in your cluster or remove exisiting slaves for example.
+It would be a LOT better if the whole thing was done with AWS Cloudformation where the slaves could be in a nice auto scaling group.</p>
+:ET

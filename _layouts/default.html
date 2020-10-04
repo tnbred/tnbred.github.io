@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html>
-
   {% include head.html %}
 
-    <body>
-
-    {% include header.html %}
-
-    <div class="page-content">
-      <div class="wrap">
-      {{ content }}
+  <body class="dark">
+    <div class="container-fluid">
+      <header id="header">
+      {% include header.html %}
+      </header>
+      <div id="main" class="row justify-content-center">
+        <div class="col-6">
+          {{ content }}
+        </div>
       </div>
+      <footer id="footer" class="fixed-bottom">
+        <div class="row justify-content-center">
+          <div class=col-sm-auto">
+            <small class="text-muted">
+              ©2020 Thomas Bredillet
+            </small>
+          </div>
+        </div>
+      </footer>
     </div>
-
-    {% include footer.html %}
-
-    </body>
+  </body>
 </html>

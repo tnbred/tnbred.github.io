@@ -1,0 +1,78 @@
+---
+---
+$header-bgd: #242528;
+$main-bgd: #333438; 
+$text: #FFFFFF;
+$link: #4095BF;
+$link-hover: #BF406A;
+
+@mixin colorify($bgd,$text,$link,$link-hover)
+{
+  background-color:$bgd;
+  color:$text;
+  * { color:$text; }
+  h1,h2,h3,h4,h5,h6 { color:$text; }
+  a, a:active, a:visited { color: $link; }
+  a, a:hover { color: $link-hover; text-decoration: none; }
+  font-family: 'Verdana';
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body { @include colorify($main-bgd,$text,$link,$link-hover)}
+
+header, .header {
+  background-color: $header-bgd;
+  font-family: 'Verdana';
+}
+
+header span {
+  font-weight: 400;
+}
+
+html * {
+  color-profile: sRGB;
+  rendering-intent: auto;
+}
+
+a {
+  transition: color 0.25s ease-in-out;
+}
+
+li.author {
+  list-style-type: none;
+}
+
+.inline {
+  display: inline;
+}
+
+div.resume h4 {
+  margin-bottom: 2rem!important; 
+  margin-top: 2rem!important;
+}
+
+div.resume h5 {
+  margin-bottom: 1.25rem!important; 
+  margin-top: 1.25rem!important;
+}
+
+div.resume p {
+  font-size: 12px;
+}
+
+div.readings h5 {
+  margin-bottom: 2rem!important;
+  margin-top: 2rem!important;
+}
+
+div.readings {
+  font-size: 12px;
+}
+
+div.readings dt {
+  margin-bottom: 1.5rem!important;
+}
+
+div.readings dd {
+  border-bottom-style: none;
+}

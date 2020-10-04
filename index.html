@@ -1,21 +1,66 @@
 ---
 layout: default
+permalink: /
 ---
 
-<div class="home">
-
-  <h1>Posts</h1>
-
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        {{ post.excerpt }}
-      </li>
-    {% endfor %}
-  </ul>
-
- 
-
+<div class="row justify-content-center mt-5">
+  <div class="col-auto">
+    <h1>
+      About Me
+    </h1>
+  </div>
 </div>
+<div class="row justify-content-center mt-5">
+  <div class="col-auto">
+    <p>
+      I'm an AI researcher currently leading machine learning
+      at Instagram. I sometimes go by 'tnb'
+    </p>
+    <p>
+      Most of my professional career has been
+      implementing a range of machine learning algorithms to improve
+      a bottom line, which I've done at Kantar (ads), Google (ads)
+      and Facebook (recommender systems).
+      I am also involved with various research organizations, conferences and I
+      love to talk about the latest ML trend of the moment!
+    </p>
+    <p>
+      Interested about my work? You can read
+      about it <a href="{{ "/articles" | prepend: site.baseurl | prepend: site.url }}">here</a>.
+    </p>
+    <p>
+      Want to reach out? Here's how you can get in touch:
+    </p>
+	<ul class="list-inline">                                       
+      <li class="list-inline-item">
+		<i class="fab fa-linkedin"></i>
+		<a href="https://www.linkedin.com/in/thomas-bredillet-59564a44/">Linkedin</a>
+	  </li>
+      <li class="list-inline-item">
+		<i class="fab fa-github"></i>
+		<a href="https://github.com/tnbred">Github</a>
+	  </li>                                          
+	  <li class="list-inline-item">                                  
+		<i class="fab fa-twitter-square"></i>
+		<a href="https://twitter.com/ThomasBredillet">Twitter</a>
+	  </li>
+	  <li class="list-inline-item">
+		<i class="fab fa-facebook-square"></i>
+		<a href="https://www.facebook.com/thomas.bredillet">Facebook</a>
+	  </li>                                                   
+	  <li class="list-inline-item">
+		<i class="fas fa-envelope-square"></i>                
+		<a href="mailto:thomas@bredillet.com">Email</a>       
+	  </li>                                                   
+	  <li class="list-inline-item">
+		<i class="fab fa-instagram-square"></i>               
+		<a href="http://www.instagram.com/tnbred">Instagram</a>
+	  </li>                                                   
+	</ul> 
+  </div>
+</div>
+<div class="row justify-content-center mt-5">
+  <div class="col-auto">
+                                                      
+  </div>
+</div>    
