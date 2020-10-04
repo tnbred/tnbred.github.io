@@ -77,7 +77,6 @@ permalink: /resume/
 
     <p>
       I hold 3 graduate degrees in Mathematics, Statistics and Financial Engineering.
-      for full details. 
     </p>
   </div>
 </div>
