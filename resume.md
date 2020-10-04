@@ -5,7 +5,7 @@ permalink: /resume/
 ---
 
 <div class="row justify-content-center resume">
-  <div class="col-8">
+  <div class="col-auto">
     <p>
       For the full story feel
       free to check out

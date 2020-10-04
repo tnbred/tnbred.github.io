@@ -13,7 +13,7 @@ $link-hover: #BF406A;
   * { color:$text; }
   h1,h2,h3,h4,h5,h6 { color:$text; }
   a, a:active, a:visited { color: $link; }
-  a, a:hover { color: $link-hover; text-decoration: none; }
+  a:hover { color: $link-hover; text-decoration: none; }
   font-family: 'Verdana';
   -webkit-font-smoothing: antialiased;
 }
