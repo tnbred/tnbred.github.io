@@ -112,7 +112,7 @@ interesting.
     </dd>
   </dl>
 
-  <h5>Video</h5>
+  <h5>Videos</h5>
 
   <dl class="row">
     <dt class="col-sm-3">
