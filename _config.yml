@@ -1,10 +1,11 @@
 # Site settings
 name: Thomas Bredillet
-title: Welcome
+title: Thomas Bredillet
 email: thomas@bredillet.com
 username: tnbredillet
 twitterusername: thomasbredillet
-description: "I'm passionate about many things and I want to share a few things with the world."
+description: "Thomas Bredillet - Machine Learning, Statistics, Computer Science"
+keyrods: "thomas bredillet, bredillet, machine learning, statistics, mathematics, systems, programming, recommender system"
 baseurl: ""
 url: "https://www.thomasbredillet.com"
 
