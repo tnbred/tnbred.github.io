@@ -8,18 +8,15 @@
         Machine Learning, Statistics, Computer Science
       </span>
       <p class="mb-0"><small class="text-muted">aka 'tnb'</small></p>
-      <ul class="list-inline">
-        <li class="list-inline-item">
-          <a href="{{ "/" | prepend: site.baseurl | prepend: site.url }}">About</a>
-        </li>
-      {% for content in site.pages %}
-        {% if content.title %}
-          <li class="list-inline-item">
-            <a href="{{ content.url | prepend: site.baseurl | prepend: site.url }}">{{ content.title }}</a>
-          </li>
-        {% endif %}
-      {% endfor %}
-      </ul>
+        <ul class="list-inline">
+        {% for content in site.pages %}
+          {% if content.title and content.title != "Resume" %}
+            <li class="list-inline-item">
+              <a href="{{ content.url | prepend: site.baseurl | prepend: site.url }}">{{ content.title }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+        </ul>
   </div>
   <div class="col-auto mt-2">
     <img src="/img/me.png" width="150" height="150" class="rounded-circle" alt="Thomas">
